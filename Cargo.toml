@@ -1,7 +1,7 @@
 [package]
 
 name = "huebridge"
-version = "0.1.0"
+version = "0.2.0"
 authors = ["Nicolas GAUTIER <ngautier@enroot.fr>"]
 description = "Rust library for Philips Hue"
 homepage = "https://github.com/NikoWoot/huebridge"

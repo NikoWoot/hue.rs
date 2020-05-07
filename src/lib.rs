@@ -19,5 +19,6 @@ error_chain! {
     }
 }
 
-mod discover;
+pub mod discover;
 pub mod bridge;
+pub mod commandlight;
