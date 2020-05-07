@@ -47,9 +47,16 @@ impl Bridge {
         })
     }
 
-    pub fn with_user(self, username: String) -> Bridge {
+    pub fn with_username(self, username: String) -> Bridge {
         Bridge {
             username: Some(username),
+            ..self
+        }
+    }
+
+    pub fn with_address(self, address: String) -> Bridge {
+        Bridge {
+            address,
             ..self
         }
     }
