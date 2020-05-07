@@ -1,4 +1,4 @@
-extern crate hueclient;
+extern crate huebridge;
 use std::env;
 
 #[allow(dead_code)]

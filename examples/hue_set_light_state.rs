@@ -1,4 +1,4 @@
-extern crate hueclient;
+extern crate huebridge;
 extern crate regex;
 
 use std::env;

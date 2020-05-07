@@ -119,23 +119,18 @@ impl CommandLight {
 
 #[derive(Debug)]
 pub struct Bridge {
-    ip: String,
+    address: String,
     username: Option<String>,
     client: reqwest::blocking::Client,
 }
 
 impl Bridge {
     #[allow(dead_code)]
-    pub fn discover() -> Option<Bridge> {
-        disco::discover_hue_bridge().ok().map(|i| Bridge {
-            ip: i,
-            username: None,
-            client: reqwest::blocking::Client::new(),
+    pub fn discover_bridge_by_meethue() -> Option<Bridge> {
+        discover::discover_bridge_by_meethue().ok().map(|i| Bridge {
+            address: i,
+            ..Bridge::default()
         })
-    }
-
-    pub fn discover_required() -> Bridge {
-        Bridge::discover().unwrap_or_else(|| panic!("No bridge found!"))
     }
 
     pub fn with_user(self, username: String) -> Bridge {
@@ -161,7 +156,7 @@ impl Bridge {
         let obtain = PostApi {
             devicetype: devicetype.to_string(),
         };
-        let url = format!("http://{}/api", self.ip);
+        let url = format!("http://{}/api", self.address);
         let success: Success =
             self.parse(self.client.post(&url[..]).json(&obtain).send()?.json()?)?;
         Ok(success.success.username)
@@ -170,7 +165,7 @@ impl Bridge {
     pub fn get_all_lights(&self) -> HueResult<Vec<IdentifiedLight>> {
         let url = format!(
             "http://{}/api/{}/lights",
-            self.ip,
+            self.address,
             self.username.clone().unwrap()
         );
         let resp: HashMap<String, Light> = self.parse(self.client.get(&url[..]).send()?.json()?)?;
@@ -188,7 +183,7 @@ impl Bridge {
     pub fn set_light_state(&self, light: usize, command: &CommandLight) -> HueResult<Value> {
         let url = format!(
             "http://{}/api/{}/lights/{}/state",
-            self.ip,
+            self.address,
             self.username.clone().unwrap(),
             light
         );
@@ -229,5 +224,15 @@ impl Bridge {
             }
         }
         Ok(from_value(value)?)
+    }
+}
+
+impl Default for Bridge {
+    fn default() -> Self {
+        Self {
+            address: "".into(),
+            username: None,
+            client: reqwest::blocking::Client::new()
+        }
     }
 }

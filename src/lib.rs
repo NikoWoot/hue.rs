@@ -19,5 +19,5 @@ error_chain! {
     }
 }
 
-mod disco;
+mod discover;
 pub mod bridge;
