@@ -1,15 +1,15 @@
 [package]
 
-name = "hueclient"
-version = "0.3.7-alpha.0"
-authors = ["Mathieu Poumeyrol <kali@zoy.org>"]
-description = "Rust library for Philips Hue lights"
-homepage = "http://github.com/kali/hue.rs"
-repository = "http://github.com/kali/hue.rs"
+name = "huebridge"
+version = "0.1.0"
+authors = ["Nicolas GAUTIER <ngautier@enroot.fr>"]
+description = "Rust library for Philips Hue"
+homepage = "https://github.com/NikoWoot/hue.rs"
+repository = "https://github.com/NikoWoot/hue.rs"
 readme = "README.md"
-license = "WTFPL"
-keywords = [ "Philips", "hue", "light", "bulb" ]
-edition = "2018"
+license = "CC BY-SA 4.0"
+keywords = [ "Philips", "hue", "light", "bulb", "zigbee" ]
+edition = "2020"
 
 [dependencies]
 error-chain="0.12"
